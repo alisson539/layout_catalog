@@ -9,21 +9,13 @@ $line-height-base: 14px;
 $transition-time: 0.3s;
 
 // Base
-:root {
+body {
+  margin: 0;
+  padding: 0;
   font-family: $font-family;
   font-size: $font-size-base;
   font-weight: 400;
   line-height: $line-height-base;
-
-  --main-color: #{$main-color};
-  --secondary-color: #{$secondary-color};
-  --blue-color: #{$blue-color};
-  --white-color: #{$white-color};
-}
-
-body {
-  margin: 0;
-  padding: 0;
 }
 
 // Header / Navigation
@@ -66,7 +58,7 @@ body {
     color: $main-color;
     text-decoration: none;
     position: relative;
-    transition: color $transition-time;
+    transition: color $transition-time; // ✅ smooth nav hover
 
     &:hover,
     &.is-active {
@@ -92,7 +84,7 @@ body {
     display: grid;
     grid-template-columns: repeat(1, 200px);
     justify-content: center;
-    gap: 48px 46px; // replaced row-gap + column-gap with shorthand
+    gap: 48px 46px; // ✅ row then column
     padding: 50px 40px;
   }
 }
@@ -111,6 +103,7 @@ body {
 
   &:hover {
     transform: scale(1.2);
+    z-index: 2; // ✅ ensures hover card appears above
   }
 
   &__image {
@@ -125,12 +118,12 @@ body {
   }
 
   &__title {
-    margin: 40px 0 4px; // fixed shorthand redundancy
+    margin: 40px 0 4px;
     font-size: 12px;
     font-weight: 500;
     line-height: 18px;
     color: $main-color;
-    transition: color $transition-time;
+    transition: color $transition-time; // ✅ smooth color transition
 
     .card:hover & {
       color: #34568b;
@@ -149,13 +142,14 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 16px 0 26px; // fixed shorthand redundancy
+    margin: 16px 0 26px;
     height: 16px;
 
     &-stars {
       display: flex;
 
-      .star {
+      // ✅ Corrected nested selector — stars are visible again
+      .card__rating-star {
         width: 16px;
         height: 16px;
         margin-right: 4px;
