@@ -1,244 +1,241 @@
-// ===============================
 // Variables
-// ===============================
 $main-color: #060b35;
 $secondary-color: #616070;
 $blue-color: #00acdc;
 $white-color: #fff;
 $font-family: 'Roboto', Arial, Helvetica, sans-serif;
-$font-size: 12px;
-$font-weight: 400;
-$line-height: 14px;
+$font-size-base: 12px;
+$line-height-base: 14px;
+$transition-time: 0.3s;
 
-// ===============================
 // Base
-// ===============================
+:root {
+  font-family: $font-family;
+  font-size: $font-size-base;
+  font-weight: 400;
+  line-height: $line-height-base;
+
+  --main-color: #{$main-color};
+  --secondary-color: #{$secondary-color};
+  --blue-color: #{$blue-color};
+  --white-color: #{$white-color};
+}
+
 body {
   margin: 0;
   padding: 0;
-  font-family: $font-family;
-  font-size: $font-size;
-  font-weight: $font-weight;
-  line-height: $line-height;
 }
 
-// ===============================
-// Header & Nav
-// ===============================
+// Header / Navigation
 .header {
-  box-sizing: border-box;
+  display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
   height: 60px;
   padding: 0 50px;
-  display: flex;
-}
-
-.logo {
-  width: 40px;
-  height: 40px;
-}
-
-.nav__list {
-  justify-content: space-between;
-  align-items: center;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  display: flex;
-}
-
-.nav__item:not(:last-child) {
-  margin-right: 20px;
-}
-
-.nav__link {
-  color: $main-color;
-  text-transform: uppercase;
-  align-items: center;
-  height: 60px;
-  font-weight: 500;
-  text-decoration: none;
-  display: flex;
-  position: relative;
-  transition: color 0.3s;
-
-  &:hover,
-  &.is-active {
-    color: $blue-color;
-  }
-
-  &.is-active::after {
-    content: '';
-    background-color: $blue-color;
-    border-radius: 2px;
-    width: 100%;
-    height: 4px;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-  }
-}
-
-// ===============================
-// Catalog Grid
-// ===============================
-.main__catalog {
-  grid-template-columns: repeat(1, 200px);
-  justify-content: center;
-  gap: 48px 46px; // row-gap first, column-gap second
-  padding: 50px 40px;
-  display: grid;
-
-  @media (min-width: 488px) {
-    grid-template-columns: repeat(2, 200px);
-  }
-
-  @media (min-width: 768px) {
-    grid-template-columns: repeat(3, 200px);
-  }
-
-  @media (min-width: 1024px) {
-    grid-template-columns: repeat(4, 200px);
-  }
-}
-
-// ===============================
-// Card
-// ===============================
-.card {
   box-sizing: border-box;
-  border: 1px solid #f3f3f3;
-  border-radius: 5px;
-  flex-direction: column;
-  width: 200px;
-  height: 408px;
-  padding: 32px 16px 16px;
-  transition: transform 0.3s;
-  display: flex;
-  position: relative;
 
-  .card__title {
-    color: $main-color;
-    margin-top: 40px;
-    margin-bottom: 4px;
-    font-size: 12px;
-    font-weight: 500;
-    line-height: 18px;
-    transition: color 0.3s;
+  &__logo {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+.nav {
+  &__list {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    align-items: center;
   }
 
-  &:hover {
-    transform: scale(1.2);
-    z-index: 2;
+  &__item {
+    &:not(:last-child) {
+      margin-right: 20px;
+    }
+  }
 
-    .card__title {
+  &__link {
+    display: flex;
+    align-items: center;
+    height: 60px;
+    font-weight: 500;
+    text-transform: uppercase;
+    color: $main-color;
+    text-decoration: none;
+    position: relative;
+    transition: color $transition-time;
+
+    &:hover,
+    &.is-active {
       color: $blue-color;
+    }
+
+    &.is-active::after {
+      content: '';
+      background-color: $blue-color;
+      border-radius: 2px;
+      width: 100%;
+      height: 4px;
+      position: absolute;
+      bottom: 0;
+      left: 0;
     }
   }
 }
 
-.card__image {
-  justify-content: center;
-  align-items: center;
+// Main block
+.main {
+  &__catalog {
+    display: grid;
+    grid-template-columns: repeat(1, 200px);
+    justify-content: center;
+    gap: 48px 46px; // replaced row-gap + column-gap with shorthand
+    padding: 50px 40px;
+  }
+}
+
+// Card
+.card {
+  width: 200px;
+  height: 408px;
   display: flex;
-}
-
-.card__img {
-  width: 160px;
-  height: 134px;
-}
-
-.card__description {
-  color: $secondary-color;
-  margin: 0;
-  font-size: 10px;
-  font-weight: 400;
-  line-height: 14px;
-}
-
-.card__button {
-  border: 1px solid $blue-color;
-  letter-spacing: 0%;
-  color: $white-color;
-  text-transform: uppercase;
-  background-color: $blue-color;
+  flex-direction: column;
+  padding: 32px 16px 16px;
+  box-sizing: border-box;
+  border: 1px solid #f3f3f3;
   border-radius: 5px;
-  justify-content: center;
-  align-items: center;
-  width: 166px;
-  height: 40px;
-  margin-top: 18px;
-  font-size: 14px;
-  font-weight: 700;
-  line-height: 16px;
-  transition:
-    background-color 0.3s,
-    color 0.3s;
-  display: flex;
+  transition: transform $transition-time;
 
   &:hover {
-    cursor: pointer;
-    color: $blue-color;
-    background-color: $white-color;
+    transform: scale(1.2);
+  }
+
+  &__image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &-img {
+      width: 160px;
+      height: 134px;
+    }
+  }
+
+  &__title {
+    margin: 40px 0 4px; // fixed shorthand redundancy
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 18px;
+    color: $main-color;
+    transition: color $transition-time;
+
+    .card:hover & {
+      color: #34568b;
+    }
+  }
+
+  &__description {
+    margin: 0;
+    font-size: 10px;
+    font-weight: 400;
+    line-height: 14px;
+    color: $secondary-color;
+  }
+
+  &__rating {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 16px 0 26px; // fixed shorthand redundancy
+    height: 16px;
+
+    &-stars {
+      display: flex;
+
+      .star {
+        width: 16px;
+        height: 16px;
+        margin-right: 4px;
+        background-image: url('../images/star.svg');
+        background-repeat: no-repeat;
+        background-position: center;
+
+        &:nth-child(-n + 4) {
+          background-image: url('../images/star-active.svg');
+        }
+      }
+    }
+
+    &-reviews {
+      font-size: 10px;
+      font-weight: 400;
+      color: $main-color;
+    }
+  }
+
+  &__price {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &-name {
+      font-size: 12px;
+      font-weight: 400;
+      color: $secondary-color;
+    }
+
+    &-num {
+      font-size: 16px;
+      font-weight: 700;
+      color: $main-color;
+    }
+  }
+
+  &__button {
+    width: 166px;
+    height: 40px;
+    margin-top: 18px;
+    border-radius: 5px;
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $blue-color;
+    color: $white-color;
+    border: 1px solid $blue-color;
+    transition:
+      background-color $transition-time,
+      color $transition-time;
+
+    &:hover {
+      background-color: $white-color;
+      color: $blue-color;
+      cursor: pointer;
+    }
   }
 }
 
-// ===============================
-// Rating
-// ===============================
-.rating {
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  height: 16px;
-  margin-top: 16px;
-  margin-bottom: 26px;
-  display: flex;
-}
-
-.rating__stars {
-  display: flex;
-}
-
-.rating__reviews {
-  color: $main-color;
-  font-size: 10px;
-  font-weight: 400;
-}
-
-.rating__star {
-  background-image: url('/src/images/star.svg');
-  background-position: center;
-  background-repeat: no-repeat;
-  width: 16px;
-  height: 16px;
-  margin-right: 4px;
-
-  &:nth-child(-n + 4) {
-    background-image: url('/src/images/star-active.svg');
+// Grid breakpoints
+@media (min-width: 488px) {
+  .main__catalog {
+    grid-template-columns: repeat(2, 200px);
   }
 }
 
-// ===============================
-// Price
-// ===============================
-.price {
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  display: flex;
+@media (min-width: 768px) {
+  .main__catalog {
+    grid-template-columns: repeat(3, 200px);
+  }
 }
 
-.price__name {
-  color: $secondary-color;
-  font-size: 12px;
-  font-weight: 400;
-}
-
-.price__num {
-  color: $main-color;
-  font-size: 16px;
-  font-weight: 700;
+@media (min-width: 1024px) {
+  .main__catalog {
+    grid-template-columns: repeat(4, 200px);
+  }
 }
